@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="jquery-3.7.1.js"></script>
+    <script>
+         
+        $(document).ready(function(){
+
+            $("#file").change(function () {
+            let file = this.files[0];
+            if (file) {
+            let reader = new FileReader();
+                reader.onload = function (e) {
+                 $("#img").attr("src", e.target.result);
+                };
+            reader.readAsDataURL(file);
+    }
+});
+
+            $("#b3").click(function(){
+            $("#main").show(3000);
+           });
+
+           $("#b4").mouseenter(function(){
+            $("#main").hide(3000);
+           });
+
+            $("#b1").click(function(){
+            $("#main").slideUp(3000);
+           });
+
+           $("#b2").mouseenter(function(){
+            $("#main").slideDown(3000);
+           });
+            
+            $("#fname,#mname,#lname,#email,#pass,#mob,#dob,#age").focus(function(){
+                $(this).css("background-color","aqua");
+            });
+
+            $("#pass").select(function(){
+                $(this).css("background-color","black");
+            });
+
+            $("#gender,#branch,#State,#City").change(function(){
+                $(this).css("background-color","goldenrod");
+            });
+
+            $("#main").submit(function(){
+                $(this).css("background-color","red");
+            });
+
+            $("button").click(function(){
+
+            let file=$("#file").val();
+            if(file==""){
+                $("#error0").text("Please upload an image.").css("color","red");
+                return false;
+            }
+
+            let fname=$("#fname").val();
+            if(fname==""){
+                $("#error").text("This field is required.").css("color","red");
+                return false;
+            }
+
+            let mname=$("#mname").val();
+            if(mname==""){
+                $("#error1").text("This field is required.").css("color","red");
+                
+            }
+
+            let lname=$("#lname").val();
+            if(lname==""){
+                $("#error2").text("This field is required.").css("color","red");
+                return false;
+            }
+            
+            let email=$("#email").val();
+            if(email==""){
+                $("#error3").text("This field is required.").css("color","red");
+                return false;
+            }
+
+            if(!email.includes('@') || !email.includes('.com')){
+                $("#error3").text("Please enter a valid email").css("color","red");           
+            
+            }
+
+            let pass=$("#pass").val();
+            if(pass==""){
+                $("#error4").text("Please enter a password").css("color","blue"); 
+                return false;
+            }
+
+            if(pass.length!=8){
+                $("#error4").text("Please enter a valid password").css("color","blue");
+                return false;
+            }
+
+            if(!pass.includes('@')){
+                $("#error4").text("Password must contain special characters").css("color","red");
+               
+            }
+            
+            let mob=$("#mob").val();
+            if(mob.length!=10){
+                $("#error5").text("Please enter valid mobile number.").css("color","red");
+                return false;
+            }
+
+            let age=$("#age").val();
+            if(age<18||age>30){
+                $("#error7").text("Age is between 18 to 30, please enter valid age.").css("color","red");
+                return false;
+            }
+            
+
+        })
+    })
+    
+</script>
+   
+</head>
+<body>
+    <button id="b1" style= "color: crimson;background-color: white; margin-left: 40%; margin-top: 2%;">SlideUp</button>
+    <button id="b2" style="color: darkblue;background-color: white;">SlideDown</button>
+    <button id="b3" style="color: olive;background-color: white;">ShowForm</button>
+    <button id="b4" style="color: darkmagenta;background-color: white;">HideForm</button>
+    <form id="main" align="margin-left">
+    
+        <fieldset style="border-radius:25PX; margin-left: 30%;margin-bottom: 5%; background: url(/background.jpg);opacity:10; text-align: center; margin-right: 30% ;margin-top: 4%;">
+            <legend>Registration-Form</legend>
+            <label>Upload image:</label>
+            <div class="center">
+                <img src="" id="img" width="100" height="100" style="border: solid black;"><br><br>
+                <input type="file" id="file" name="file">
+                <input type="button" value="upload" class="button"  id="but_upload">
+                <span id="error0"></span><br><br>
+            </div>
+            
+            <label for="fname">Enter first name:</label>
+            <input type="text" id="fname" placeholder="Enter first name">
+            <span id="error"></span><br><br>
+            <label for="mname">Enter middle name:</label>
+            <input type="text" id="mname" placeholder="Enter middle name">
+            <span id="error1"></span><br><br>
+            <label for="lname">Enter last name:</label>
+            <input type="text" id="lname" placeholder="Enter last name">
+            <span id="error2"></span><br><br>
+            <label for="email">Enter email:</label>
+            <input type="email" id="email" placeholder="Enter email">
+            <span id="error3"></span><br><br>
+            <label for="pass">Enter password:</label>
+            <input type="password" id="pass" placeholder="Enter password">
+            <span id="error4"></span><br><br>
+            <label for="mob">Enter MobileNo:</label>
+            <input type="number" id="mob" placeholder="Enter Mobile number">
+            <span id="error5"></span><br><br>
+            <label for="dob">Enter DOB:</label>
+            <input type="date" id="dob" placeholder="Enter DOB" required>
+            <span id="error6"></span><br><br>
+            <label for="age">Enter age:</label>
+            <input type="number" id="age" placeholder="Enter age">
+            <span id="error7"></span><br><br>
+            <label for="gender">Select gender:</label>
+            <select name="gender" id="gender" style="border: black solid;">
+                <option value="None">None</option>
+                <option value="Male">Male</option>
+                <option value="Feamle">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <span id="error8"></span>
+            <label for="branch">Select branch:</label>
+            <select name="branch" id="branch" style="border: black solid;">
+                <option value="None">None</option>
+                <option value="Arts">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts</option>
+            </select>
+            <span id="error9"></span><br><br>
+            <label for="State">Select State:</label>
+            <select name="State" id="State"style="border:solid;" >
+                <option value="None">None</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chattisgarh">Chattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujrat">Gujrat</option>
+                <option value="Harayan">Harayan</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajsthan">Rajsthan</option>
+            </select>
+            <span id="error10"></span>
+            <label for="City">Select City:</label>
+            <select name="City" id="City" style="border:solid;">
+                <option value="None">None</option>
+                <option value="Pune">Pune</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Amravati">Amravati</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Ratnagiri">Ratnagiri</option>
+                <option value="Kolhapur">Kolhapur</option>
+                <option value="Satara">Satara</option>
+                <option value="Sangli">Sangli</option>
+                <option value="Akola">Akola</option>
+                <option value="Jalgaon">Jalgaon</option>
+            </select>
+            <span id="error11"></span><br><br>
+            
+            <button>Submit</button>
+        </fieldset>
+        
+    </form>
+    
+</body>
+</html>
